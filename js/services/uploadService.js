@@ -4,13 +4,14 @@
         .module('app').factory('UploadService', UploadService);
     UploadService.$inject = ['Upload','$rootScope'];
     function UploadService(Upload,$rootScope) {
+        const BaseServerUrl = envService.read('apiUrl');
         var service = {};
 
         service.uploadFiles = uploadFiles;
         return service;
 
         function uploadFiles(obj) {
-            var $url = $rootScope.apiUrl + 'upload/uploadVideo';
+            var $url = BaseServerUrl + 'upload/uploadVideo';
             return Upload.upload({
                 url: $url,
                 data: {file: obj}
