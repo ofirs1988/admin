@@ -17,7 +17,6 @@ var app = angular
   'permission',
   'permission.ui',
   'satellizer',
-  'mm.acl',
   'angular-jwt',
   'environment',
   'oc.lazyLoad',
@@ -27,8 +26,8 @@ var app = angular
 ]);
 
 
-app.config(['cfpLoadingBarProvider','envServiceProvider','$authProvider','AclServiceProvider','$ocLazyLoadProvider',
-    function(cfpLoadingBarProvider,envServiceProvider,$authProvider,AclServiceProvider,$ocLazyLoadProvider) {
+app.config(['cfpLoadingBarProvider','envServiceProvider','$authProvider','$ocLazyLoadProvider',
+    function(cfpLoadingBarProvider,envServiceProvider,$authProvider,$ocLazyLoadProvider) {
   cfpLoadingBarProvider.includeSpinner = true;
   cfpLoadingBarProvider.latencyThreshold = 1;
     envServiceProvider.config({
@@ -59,20 +58,8 @@ app.config(['cfpLoadingBarProvider','envServiceProvider','$authProvider','AclSer
     envServiceProvider.check();
     $authProvider.loginUrl = envServiceProvider.read('apiUrl') + 'user/adminLogin';
 
-    var myConfig = {
-        storage: 'localStorage',
-        storageKey: 'AppAcl'
-    };
-    AclServiceProvider.config(myConfig);
-
-
-
-
 }])
 
-.config(['AclServiceProvider', function (AclServiceProvider) {
-    AclServiceProvider.resume();
-}])
 
 
 .run(['$rootScope','$state','$stateParams','$http','envService','$transitions','PermPermissionStore','$timeout','$q','AuthenticationService',
