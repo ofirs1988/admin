@@ -14,6 +14,8 @@ var grayLightest =  '#f8f9fa';
 var app = angular
 .module('app', ['ui.router',
   'ngSanitize',
+  'permission',
+  'permission.ui',
   'satellizer',
   'mm.acl',
   'angular-jwt',
@@ -22,11 +24,13 @@ var app = angular
   'ncy-angular-breadcrumb',
   'angular-loading-bar',
   'ngFileUpload'
-])
-.config(['cfpLoadingBarProvider','envServiceProvider','$authProvider','AclServiceProvider', function(cfpLoadingBarProvider,envServiceProvider,$authProvider,AclServiceProvider) {
-  cfpLoadingBarProvider.includeSpinner = false;
-  cfpLoadingBarProvider.latencyThreshold = 1;
+]);
 
+
+app.config(['cfpLoadingBarProvider','envServiceProvider','$authProvider','AclServiceProvider','$ocLazyLoadProvider',
+    function(cfpLoadingBarProvider,envServiceProvider,$authProvider,AclServiceProvider,$ocLazyLoadProvider) {
+  cfpLoadingBarProvider.includeSpinner = true;
+  cfpLoadingBarProvider.latencyThreshold = 1;
     envServiceProvider.config({
         domains: {
             development: ['localhost', 'http://localhost:8000'],
@@ -43,8 +47,8 @@ var app = angular
                 staticUrl: 'http://127.0.0.1:8000/test/admin/',
             },
             production: {
-                apiUrl: 'http://46.101.194.126/public/api/admin/',
-                staticUrl: 'http://46.101.194.126/public/api/admin/',
+                apiUrl: 'http://46.101.194.126/laravel/public/api/admin/',
+                staticUrl: 'http://46.101.194.126/laravel/public/api/admin/',
             },
             defaults: {
                 apiUrl: '//api.default.com/v1',
@@ -61,6 +65,9 @@ var app = angular
     };
     AclServiceProvider.config(myConfig);
 
+
+
+
 }])
 
 .config(['AclServiceProvider', function (AclServiceProvider) {
@@ -68,27 +75,29 @@ var app = angular
 }])
 
 
-.run(['$rootScope', '$state', '$stateParams','$http','envService','AclService',
-    function($rootScope, $state, $stateParams,$http,envService,AclService) {
+.run(['$rootScope','$state','$stateParams','$http','envService','$transitions','PermPermissionStore','$timeout','$q','AuthenticationService',
+    function($rootScope, $state, $stateParams,$http,envService,$transitions,PermPermissionStore,$timeout,$q,AuthenticationService) {
+        /* Before load app */
+            var deferred = $q.defer();
+                AuthenticationService.isAuthorized().then(function (response){
+                    if(!response.success){
+                        $state.go('appSimple.login',{}, {reload: true});
+                        deferred.reject();
+                    }else{
+                        PermPermissionStore.defineManyPermissions(response.permissionList, function (
+                                permissionName, transitionProperties) {
+                                    //transitionProperties
+                        });
+                        deferred.resolve();
+                    }
+                });
 
 
-        console.log(AclService.resume());
-        if (!AclService.resume()) {
-            // Web storage record did not exist, we'll have to build it from scratch
+        $transitions.onSuccess({}, function() {
+            //event.preventDefault();
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
+        });
 
-            // Get the user role, and add it to AclService
-            //var userRole = fetchUserRoleFromSomewhere();
-            //AclService.addRole(userRole);
-
-            // Get ACL data, and add it to AclService
-            //var aclData = fetchAclFromSomewhere();
-            //AclService.setAbilities(aclData);
-        }
-
-  console.log(envService.get());
-  $rootScope.$on('$stateChangeSuccess',function(){
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
-  });
   $rootScope.$state = $state;
   return $rootScope.$stateParams = $stateParams;
 }]);

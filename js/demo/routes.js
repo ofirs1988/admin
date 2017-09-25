@@ -46,6 +46,12 @@ angular
     controller: 'createUserController',
     controllerAs: 'vm',
     templateUrl: 'views/components/createUser/createUser.html',
+      data: {
+          permissions: {
+              only: ['Administrator'],
+              redirectTo: 'appSimple.404'
+          }
+      },
     ncyBreadcrumb: {
       label: 'createUser'
     }

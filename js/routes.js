@@ -2,11 +2,14 @@ angular
 .module('app')
 .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$breadcrumbProvider', function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $breadcrumbProvider) {
 
-  $urlRouterProvider.otherwise('/dashboard');
+    $urlRouterProvider.otherwise( function($injector) {
+        var $state = $injector.get("$state");
+        $state.go('/dashboard');
+    });
 
   $ocLazyLoadProvider.config({
     // Set to true if you want to see what and when is dynamically loaded
-    debug: true
+    debug: false
   });
 
   $breadcrumbProvider.setOptions({
@@ -24,23 +27,10 @@ angular
       label: 'Root',
       skip: true
     },
-    resolve: {
+      resolve: {
         AuthUser: ['AuthenticationService','$state','$window', '$q','$timeout',
             function (AuthenticationService,$state, $window,$q,$timeout) {
-                var deferred = $q.defer();
-                $timeout(function() {
-                  AuthenticationService.isAuthorized().then(function (response){
 
-                        //$rootScope.userLogin = response.success;
-                        if(!response.success){
-                            $state.go('appSimple.login',{}, {reload: true});
-                            deferred.reject();
-                        }else {
-                            deferred.resolve();
-                        }
-                    });
-                });
-                return deferred.promise;
         }],
 
       loadCSS: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -75,8 +65,13 @@ angular
     ncyBreadcrumb: {
       label: 'Home',
     },
+      data: {
+          permissions: {
+              only: ['Admin','Administrator','Author','Editor','Anonymous'],
+              redirectTo: 'appSimple.404'
+          }
+      },
     //page subtitle goes here
-    params: { subtitle: 'Welcome to ROOT powerfull Bootstrap & AngularJS UI Kit' },
     resolve: {
       loadPlugin: ['$ocLazyLoad', function ($ocLazyLoad) {
         // you can lazy load files for an existing module

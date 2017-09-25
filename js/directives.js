@@ -1,6 +1,5 @@
 angular
 .module('app')
-.directive('appLoad', appLoad)
 .directive('a', preventClickDirective)
 .directive('a', bootstrapCollapseDirective)
 .directive('a', navigationDirective)
@@ -11,28 +10,6 @@ angular
 .directive('toggle', bootstrapTooltipsPopoversDirective)
 .directive('tab', bootstrapTabsDirective)
 .directive('button', cardCollapseDirective)
-
-
-
-function appLoad(AuthenticationService) {
-
-    var directive = {
-        restrict: 'E',
-        link: link
-    }
-    return directive;
-
-    function link(scope, element, attrs) {
-      console.log(111);
-        AuthenticationService.checkAuth().then(function (response){
-            console.log(response);
-            $rootScope.userLogin = response.success;
-            if(!response.success){
-                $state.go('appSimple.login',{});
-            }
-        });
-    }
-}
 
 
 //Prevent click if href="#"

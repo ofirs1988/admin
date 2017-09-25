@@ -12,9 +12,10 @@
             <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('app.components')}">
                 <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('app.components')}" href="#"><i class="icon-puzzle"></i> Company</a>
                 <ul class="nav-dropdown-items">
-                    <!--<li class="nav-item">-->
-                        <!--<a class="nav-link" ui-sref-active="active" ui-sref="app.components.upload"><i class="icon-puzzle"></i> Upload</a>-->
-                    <!--</li>-->
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.components.upload" permission
+                           permission-only="['Administrator','ADMIN']"><i class="icon-puzzle"></i> Upload</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" ui-sref-active="active" ui-sref="app.components.createUser"><i class="icon-puzzle"></i> Create User</a>
                     </li>

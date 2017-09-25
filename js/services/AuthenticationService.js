@@ -1,8 +1,8 @@
 (function () {
     'use strict';
     angular.module('app').factory('AuthenticationService', AuthenticationService);
-    AuthenticationService.$inject = ['$rootScope','httpService','$q','$http','$auth'];
-    function AuthenticationService($rootScope,httpService,$q,$http,$auth){
+    AuthenticationService.$inject = ['$rootScope','httpService','$q','$http','$auth','permissionsService'];
+    function AuthenticationService($rootScope,httpService,$q,$http,$auth,permissionsService){
         var service = {};
 
         service.isAuthorized = isAuthorized;
@@ -26,13 +26,15 @@
             var deferred = $q.defer();
             var clear = false;
             return httpService.httpPost('user/getUser',[]).then(function (res) {
-                if(!res[0].data.success || localStorage.getItem(Base64.encode('user'))){
+                if(!res[0].data[0].success || !localStorage.getItem(Base64.encode('user'))){
                     ClearCredentials(function(response) {
                         if(response)
                             clear = true;
                     });
+                }else{
+                    var permissionList = permissionsService.setPermissions(res[0].data[0].permissions);
                 }
-                deferred.resolve({success: res[0].data.success,clear: clear});
+                deferred.resolve({success: res[0].data[0].success,clear: clear,permissionList:permissionList});
                 return deferred.promise;
             });
         }

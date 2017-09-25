@@ -8,10 +8,10 @@
 
         function login() {
             AuthenticationService.AuthUser(vm.user).then(function (response) {
-                if(!response.success){
+                if(!response.data.success){
                     $scope.$errors = response.error;
                 }else {
-                    $state.go('app.main');
+                    $state.go('app.main',{});
                 }
             })
         }

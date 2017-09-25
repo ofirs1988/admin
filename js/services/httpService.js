@@ -1,8 +1,8 @@
 (function () {
     'use strict';
     app.factory('httpService', httpService);
-    httpService.$inject = ['$http','$rootScope','envService'];
-    function httpService($http,$rootScope,envService) {
+    httpService.$inject = ['$http','envService'];
+    function httpService($http,envService) {
         var data = [];
         const BaseServerUrl = envService.read('apiUrl');
 
