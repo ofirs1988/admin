@@ -75,14 +75,17 @@ app.config(['cfpLoadingBarProvider','envServiceProvider','$authProvider','$permi
                         $state.go('appSimple.login',{}, {reload: true});
                         deferred.reject();
                     }else {
-                        PermPermissionStore.defineManyPermissions(response.permissionList, function (
-                            permissionName, transitionProperties) {
-                            console.log(permissionName);
-                            //transitionProperties
-                        });
-                        $urlRouter.sync();
-                        // Also enable router to listen to url changes
-                        $urlRouter.listen();
+                        if (0 < response.permissionList.length) {
+                            // do stuff
+                            PermPermissionStore.defineManyPermissions(response.permissionList, function (
+                                permissionName, transitionProperties) {
+                                console.log(permissionName);
+                                //transitionProperties
+                            });
+                            $urlRouter.sync();
+                            // Also enable router to listen to url changes
+                            $urlRouter.listen();
+                        }
                         deferred.resolve();
                     }
                 });

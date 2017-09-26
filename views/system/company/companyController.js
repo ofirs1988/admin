@@ -1,10 +1,12 @@
-app.controller('companyController', ['$scope','httpService', function ($scope,httpService) {
+app.controller('companyController', ['$scope','companyService', function ($scope,companyService) {
     console.log('company Controller');
     var vm = this;
     vm.createCompany = createCompany;
 
     function createCompany() {
-        console.log(vm);
+        companyService.createCompany(vm.user,vm.company).then(function (response) {
+            console.log(response);
+        })
     }
 
 }]);
