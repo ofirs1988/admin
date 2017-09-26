@@ -1,15 +1,15 @@
 angular
 .module('app')
 .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$breadcrumbProvider', function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $breadcrumbProvider) {
-
     $urlRouterProvider.otherwise( function($injector) {
         var $state = $injector.get("$state");
-        $state.go('/dashboard');
+        console.log($state);
+        $state.go('app.main');
     });
 
   $ocLazyLoadProvider.config({
     // Set to true if you want to see what and when is dynamically loaded
-    debug: true
+    debug: false
   });
 
   $breadcrumbProvider.setOptions({
@@ -28,22 +28,6 @@ angular
       skip: true
     },
       resolve: {
-        AuthUser: ['AuthenticationService','$state','$window', '$q','$timeout','PermPermissionStore',
-            function (AuthenticationService,$state, $window,$q,$timeout,PermPermissionStore) {
-            console.log(1111);
-          }],
-      // loadCSS: ['$ocLazyLoad', function($ocLazyLoad) {
-      //   // you can lazy load CSS files
-      //   return $ocLazyLoad.load([{
-      //     serie: true,
-      //     name: 'Font Awesome',
-      //     files: ['css/font-awesome.min.css']
-      //   },{
-      //     serie: true,
-      //     name: 'Simple Line Icons',
-      //     files: ['css/simple-line-icons.css']
-      //   }]);
-      // }],
       // loadPlugin: ['$ocLazyLoad', function ($ocLazyLoad) {
       //   // you can lazy load files for an existing module
       //   return $ocLazyLoad.load([{
@@ -70,7 +54,6 @@ angular
               //redirectTo: 'appSimple.login'
           }
       },
-
     //page subtitle goes here
     resolve: {
       loadPlugin: ['$ocLazyLoad', function ($ocLazyLoad) {
@@ -97,20 +80,6 @@ angular
   .state('appSimple', {
     abstract: true,
     templateUrl: 'views/common/layouts/simple.html',
-    resolve: {
-      loadPlugin: ['$ocLazyLoad', function ($ocLazyLoad) {
-        // you can lazy load files for an existing module
-        return $ocLazyLoad.load([{
-          serie: true,
-          name: 'Font Awesome',
-          files: ['css/font-awesome.min.css']
-        },{
-          serie: true,
-          name: 'Simple Line Icons',
-          files: ['css/simple-line-icons.css']
-        }]);
-      }],
-    }
   })
 
   // Additional Pages
@@ -134,11 +103,3 @@ angular
   })
 }]);
 
-
-app.factory('repoService', function ($http) {
-    return {
-        getItems: function () {
-            return 1111;
-        }
-    };
-});

@@ -49,7 +49,6 @@ angular
       data: {
           permissions: {
               only: ['Administrator'],
-              redirectTo: 'appSimple.404'
           }
       },
     ncyBreadcrumb: {
@@ -163,4 +162,9 @@ angular
       }]
     }
   })
+
+
+
 }]);
+
+

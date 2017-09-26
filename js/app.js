@@ -25,8 +25,8 @@ var app = angular
   'ngFileUpload'
 ]);
 
-app.config(['cfpLoadingBarProvider','envServiceProvider','$authProvider',
-    function(cfpLoadingBarProvider,envServiceProvider,$authProvider) {
+app.config(['cfpLoadingBarProvider','envServiceProvider','$authProvider','$permissionProvider',
+    function(cfpLoadingBarProvider,envServiceProvider,$authProvider,$permissionProvider) {
   cfpLoadingBarProvider.includeSpinner = true;
   cfpLoadingBarProvider.latencyThreshold = 1;
     envServiceProvider.config({
@@ -54,6 +54,7 @@ app.config(['cfpLoadingBarProvider','envServiceProvider','$authProvider',
             }
         }
     });
+    $permissionProvider.suppressUndefinedPermissionWarning(true);
     envServiceProvider.check();
     $authProvider.loginUrl = envServiceProvider.read('apiUrl') + 'user/adminLogin';
 
@@ -64,7 +65,7 @@ app.config(['cfpLoadingBarProvider','envServiceProvider','$authProvider',
 .run(['$rootScope','$state','$stateParams','$http','envService','$transitions','PermPermissionStore','$timeout','$q','AuthenticationService','$urlRouter',
     function($rootScope, $state, $stateParams,$http,envService,$transitions,PermPermissionStore,$timeout,$q,AuthenticationService,$urlRouter) {
         /* Before load app */
-        $transitions.onBefore({},function () {
+
             var deferred = $q.defer();
             $timeout(function() {
                 AuthenticationService.isAuthorized().then(function (response){
@@ -86,7 +87,7 @@ app.config(['cfpLoadingBarProvider','envServiceProvider','$authProvider',
                     }
                 });
             });
-        });
+
 
 
 

@@ -1,0 +1,85 @@
+<div class="col-sm-12">
+    <form ng-submit="vm.createCompany()">
+    <div class="card">
+        <div class="card-header">
+            <strong>User</strong>
+            <small>Form</small>
+        </div>
+        <div class="card-block">
+            <div class="form-group">
+                <label for="user_email">Email</label>
+                <input type="email" class="form-control" ng-model="vm.user.email" id="user_email" placeholder="Enter email">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" ng-model="vm.user.password" placeholder="Enter password">
+            </div>
+
+            <div class="form-group">
+                <label for="userName">Name</label>
+                <input type="text" class="form-control" id="userName" ng-model="vm.user.name" placeholder="Contact name">
+            </div>
+                <div class="form-group">
+                    <label for="user_phone">User Phone</label>
+                    <input type="text" class="form-control" ng-model="vm.user.phone" id="user_phone" placeholder="Enter your Phone">
+                </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="card">
+        <div class="card-header">
+            <strong>Company</strong>
+            <small>Form</small>
+        </div>
+        <div class="card-block">
+            <div class="form-group">
+                <label for="company">Company Name</label>
+                <input type="text" class="form-control" ng-model="vm.company.name" id="company" placeholder="Enter your company name">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="email" g-model="vm.company.email" placeholder="Email">
+            </div>
+
+            <div class="form-group">
+                <label for="contact_name">Contact name</label>
+                <input type="text" class="form-control" id="contact_name" ng-model="vm.company.contact_name" placeholder="Contact name">
+            </div>
+
+            <div class="row">
+
+                <div class="form-group col-sm-8">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control" id="phone" ng-model="vm.company.phone" placeholder="Enter your Phone">
+                </div>
+
+                <div class="form-group col-sm-4">
+                    <label for="op">op</label>
+                    <input type="text" class="form-control" id="op" ng-model="vm.company.op" placeholder="Enter your op">
+                </div>
+
+            </div>
+            <!--/.row-->
+
+            <div class="form-group">
+                <label for="site">Site</label>
+                <input type="text" class="form-control" id="site" ng-model="vm.company.site" placeholder="Enter your site">
+
+
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Create Company</button>
+            </div>
+
+        </div>
+
+    </div>
+    </form>
+</div>
