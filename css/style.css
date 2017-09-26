@@ -57,6 +57,12 @@ abbr[title] {
   text-decoration: underline;
   text-decoration: underline dotted; }
 
+footer.app-footer{
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
 b,
 strong {
   font-weight: inherit; }

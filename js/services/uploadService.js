@@ -2,8 +2,8 @@
     'use strict';
     angular
         .module('app').factory('UploadService', UploadService);
-    UploadService.$inject = ['Upload','$rootScope'];
-    function UploadService(Upload,$rootScope) {
+    UploadService.$inject = ['Upload','$rootScope','envService'];
+    function UploadService(Upload,$rootScope,envService) {
         const BaseServerUrl = envService.read('apiUrl');
         var service = {};
 

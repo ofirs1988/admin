@@ -1,8 +1,8 @@
 (function () {
     'use strict';
     angular.module('app').factory('AuthenticationService', AuthenticationService);
-    AuthenticationService.$inject = ['$rootScope','httpService','$q','$http','$auth','permissionsService'];
-    function AuthenticationService($rootScope,httpService,$q,$http,$auth,permissionsService){
+    AuthenticationService.$inject = ['$rootScope','httpService','$q','$http','$auth','permissionsService','PermPermissionStore'];
+    function AuthenticationService($rootScope,httpService,$q,$http,$auth,permissionsService,PermPermissionStore){
         var service = {};
 
         service.isAuthorized = isAuthorized;
@@ -13,7 +13,14 @@
             var deferred = $q.defer();
             return $auth.login(credentials).then(function(res){
                 if(res.data.success){
+
+                    var permissionList = permissionsService.setPermissions(res.data.permissionsList);
+                    PermPermissionStore.defineManyPermissions(permissionList, function (
+                        permissionName, transitionProperties) {
+                        //transitionProperties
+                    });
                     setUserLocalStrorage(res.data.user);
+
                     deferred.resolve({success: true , data: res.data});
                 }else {
                     deferred.resolve({success: false , error: res.data.massage});

@@ -9,7 +9,7 @@ angular
 
   $ocLazyLoadProvider.config({
     // Set to true if you want to see what and when is dynamically loaded
-    debug: false
+    debug: true
   });
 
   $breadcrumbProvider.setOptions({
@@ -28,34 +28,33 @@ angular
       skip: true
     },
       resolve: {
-        AuthUser: ['AuthenticationService','$state','$window', '$q','$timeout',
-            function (AuthenticationService,$state, $window,$q,$timeout) {
-
-        }],
-
-      loadCSS: ['$ocLazyLoad', function($ocLazyLoad) {
-        // you can lazy load CSS files
-        return $ocLazyLoad.load([{
-          serie: true,
-          name: 'Font Awesome',
-          files: ['css/font-awesome.min.css']
-        },{
-          serie: true,
-          name: 'Simple Line Icons',
-          files: ['css/simple-line-icons.css']
-        }]);
-      }],
-      loadPlugin: ['$ocLazyLoad', function ($ocLazyLoad) {
-        // you can lazy load files for an existing module
-        return $ocLazyLoad.load([{
-          serie: true,
-          name: 'chart.js',
-          files: [
-            '../bower_components/chart.js/dist/Chart.min.js',
-            '../bower_components/angular-chart.js/dist/angular-chart.min.js'
-          ]
-        }]);
-      }],
+        AuthUser: ['AuthenticationService','$state','$window', '$q','$timeout','PermPermissionStore',
+            function (AuthenticationService,$state, $window,$q,$timeout,PermPermissionStore) {
+            console.log(1111);
+          }],
+      // loadCSS: ['$ocLazyLoad', function($ocLazyLoad) {
+      //   // you can lazy load CSS files
+      //   return $ocLazyLoad.load([{
+      //     serie: true,
+      //     name: 'Font Awesome',
+      //     files: ['css/font-awesome.min.css']
+      //   },{
+      //     serie: true,
+      //     name: 'Simple Line Icons',
+      //     files: ['css/simple-line-icons.css']
+      //   }]);
+      // }],
+      // loadPlugin: ['$ocLazyLoad', function ($ocLazyLoad) {
+      //   // you can lazy load files for an existing module
+      //   return $ocLazyLoad.load([{
+      //     serie: true,
+      //     name: 'chart.js',
+      //     files: [
+      //       '../bower_components/chart.js/dist/Chart.min.js',
+      //       '../bower_components/angular-chart.js/dist/angular-chart.min.js'
+      //     ]
+      //   }]);
+      // }],
     }
   })
   .state('app.main', {
@@ -67,10 +66,11 @@ angular
     },
       data: {
           permissions: {
-              only: ['Admin','Administrator','Author','Editor','Anonymous'],
-              redirectTo: 'appSimple.404'
+              only: ['ADMIN','Administrator']
+              //redirectTo: 'appSimple.login'
           }
       },
+
     //page subtitle goes here
     resolve: {
       loadPlugin: ['$ocLazyLoad', function ($ocLazyLoad) {
@@ -133,3 +133,12 @@ angular
     templateUrl: 'views/pages/500.html'
   })
 }]);
+
+
+app.factory('repoService', function ($http) {
+    return {
+        getItems: function () {
+            return 1111;
+        }
+    };
+});

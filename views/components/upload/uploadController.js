@@ -1,5 +1,12 @@
-app.controller('uploadController', ['$scope', 'Upload','UploadService', function ($scope, Upload,UploadService) {
+app.controller('uploadController', ['$scope', 'Upload','UploadService','httpService', function ($scope, Upload,UploadService,httpService) {
     // upload later on form submit or something similar
+
+
+    httpService.httpPost('getCampaign',[]).then(function (res) {
+        console.log(res);
+    });
+
+
     $scope.submit = function() {
         if ($scope.form.file.$valid && $scope.obj.video) {
             $scope.obj.video.CurrentName = $scope.obj.name;

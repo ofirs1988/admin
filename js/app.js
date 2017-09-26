@@ -25,9 +25,8 @@ var app = angular
   'ngFileUpload'
 ]);
 
-
-app.config(['cfpLoadingBarProvider','envServiceProvider','$authProvider','$ocLazyLoadProvider',
-    function(cfpLoadingBarProvider,envServiceProvider,$authProvider,$ocLazyLoadProvider) {
+app.config(['cfpLoadingBarProvider','envServiceProvider','$authProvider',
+    function(cfpLoadingBarProvider,envServiceProvider,$authProvider) {
   cfpLoadingBarProvider.includeSpinner = true;
   cfpLoadingBarProvider.latencyThreshold = 1;
     envServiceProvider.config({
@@ -62,22 +61,33 @@ app.config(['cfpLoadingBarProvider','envServiceProvider','$authProvider','$ocLaz
 
 
 
-.run(['$rootScope','$state','$stateParams','$http','envService','$transitions','PermPermissionStore','$timeout','$q','AuthenticationService',
-    function($rootScope, $state, $stateParams,$http,envService,$transitions,PermPermissionStore,$timeout,$q,AuthenticationService) {
+.run(['$rootScope','$state','$stateParams','$http','envService','$transitions','PermPermissionStore','$timeout','$q','AuthenticationService','$urlRouter',
+    function($rootScope, $state, $stateParams,$http,envService,$transitions,PermPermissionStore,$timeout,$q,AuthenticationService,$urlRouter) {
         /* Before load app */
+        $transitions.onBefore({},function () {
             var deferred = $q.defer();
+            $timeout(function() {
                 AuthenticationService.isAuthorized().then(function (response){
+                    console.log(response);
+                    //$rootScope.userLogin = response.success;
                     if(!response.success){
                         $state.go('appSimple.login',{}, {reload: true});
                         deferred.reject();
-                    }else{
+                    }else {
                         PermPermissionStore.defineManyPermissions(response.permissionList, function (
-                                permissionName, transitionProperties) {
-                                    //transitionProperties
+                            permissionName, transitionProperties) {
+                            console.log(permissionName);
+                            //transitionProperties
                         });
+                        $urlRouter.sync();
+                        // Also enable router to listen to url changes
+                        $urlRouter.listen();
                         deferred.resolve();
                     }
                 });
+            });
+        });
+
 
 
         $transitions.onSuccess({}, function() {
@@ -85,8 +95,8 @@ app.config(['cfpLoadingBarProvider','envServiceProvider','$authProvider','$ocLaz
             document.body.scrollTop = document.documentElement.scrollTop = 0;
         });
 
-  $rootScope.$state = $state;
-  return $rootScope.$stateParams = $stateParams;
+   $rootScope.$state = $state;
+   return $rootScope.$stateParams = $stateParams;
 }]);
 
 
