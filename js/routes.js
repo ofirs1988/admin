@@ -22,6 +22,8 @@ angular
   .state('app', {
     abstract: true,
     templateUrl: 'views/common/layouts/full.html',
+    controller: 'mainController',
+    controllerAs : 'vm',
     //page title goes here
     ncyBreadcrumb: {
       label: 'Root',

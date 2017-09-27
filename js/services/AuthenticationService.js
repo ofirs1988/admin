@@ -13,14 +13,11 @@
             var deferred = $q.defer();
             return $auth.login(credentials).then(function(res){
                 if(res.data.success){
-
                     var permissionList = permissionsService.setPermissions(res.data.permissionsList);
                     PermPermissionStore.defineManyPermissions(permissionList, function (
                         permissionName, transitionProperties) {
-                        //transitionProperties
                     });
-                    setUserLocalStrorage(res.data.user);
-
+                    setUserLocalStrorage(res.data);
                     deferred.resolve({success: true , data: res.data});
                 }else {
                     deferred.resolve({success: false , error: res.data.massage});
@@ -63,10 +60,12 @@
         }
 
 
-        function setUserLocalStrorage(user){
-            if(user){
+        function setUserLocalStrorage(data){
+            console.log(data);
+            if(data){
                 if(!localStorage.getItem(Base64.decode('user'))){
-                    localStorage.setItem(Base64.encode('user'),JSON.stringify(user));
+                    localStorage.setItem(Base64.encode('user'),JSON.stringify(data.user));
+                    localStorage.setItem(Base64.encode('company'),JSON.stringify(data.company));
                     return true;
                 }
             }

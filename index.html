@@ -4,22 +4,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
-    <meta name="author" content="Łukasz Holeczek">
+    <meta name="description" content="Admin Panel">
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,AngularJS,Angular,Angular2,Angular 2,Angular4,Angular 4,jQuery,CSS,HTML,RWD,Dashboard,React,React.js,Vue,Vue.js">
     <link rel="shortcut icon" href="img/favicon.png">
-
-    <title>vmarketing</title>
+    <title>Vmarketing</title>
 
     <!-- Main styles for this application -->
     <link href="css/simple-line-icons.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
-
     <!-- User Interface -->
     <ui-view></ui-view>
 
@@ -27,10 +23,8 @@
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/tether/dist/js/tether.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
     <!-- AngularJS -->
     <script src="bower_components/angular/angular.min.js"></script>
-
     <!-- AngularJS plugins -->
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
@@ -50,21 +44,20 @@
 
     <script src="js/routes.js"></script>
     <script src="js/demo/routesSystem.js"></script>
-    <script src="views/components/upload/uploadController.js"></script>
-    <script src="js/services/uploadService.js"></script>
     <script src="js/services/httpService.js"></script>
-    <script src="js/services/AuthenticationService.js"></script>
+    <script src="js/services/adminService.js"></script>
     <script src="js/services/permissionsService.js"></script>
+    <script src="js/services/AuthenticationService.js"></script>
     <script src="js/services/companyService.js"></script>
+    <script src="js/services/uploadService.js"></script>
+    <script src="views/common/mainController.js"></script>
+    <script src="views/components/upload/uploadController.js"></script>
     <script src="views/pages/login/loginController.js"></script>
     <script src="views/components/createUser/createUserController.js"></script>
     <script src="views/system/company/companyController.js"></script>
 
-
     <script src="js/demo/routes.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/directives.js"></script>
-
 </body>
-
 </html>

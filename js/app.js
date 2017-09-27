@@ -65,11 +65,9 @@ app.config(['cfpLoadingBarProvider','envServiceProvider','$authProvider','$permi
 .run(['$rootScope','$state','$stateParams','$http','envService','$transitions','PermPermissionStore','$timeout','$q','AuthenticationService','$urlRouter',
     function($rootScope, $state, $stateParams,$http,envService,$transitions,PermPermissionStore,$timeout,$q,AuthenticationService,$urlRouter) {
         /* Before load app */
-
             var deferred = $q.defer();
             $timeout(function() {
                 AuthenticationService.isAuthorized().then(function (response){
-                    console.log(response);
                     //$rootScope.userLogin = response.success;
                     if(!response.success){
                         $state.go('appSimple.login',{}, {reload: true});
@@ -91,13 +89,10 @@ app.config(['cfpLoadingBarProvider','envServiceProvider','$authProvider','$permi
                 });
             });
 
-
-
-
-        $transitions.onSuccess({}, function() {
-            //event.preventDefault();
-            document.body.scrollTop = document.documentElement.scrollTop = 0;
-        });
+    $transitions.onSuccess({}, function() {
+       //event.preventDefault();
+       document.body.scrollTop = document.documentElement.scrollTop = 0;
+     });
 
    $rootScope.$state = $state;
    return $rootScope.$stateParams = $stateParams;

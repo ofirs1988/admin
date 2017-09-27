@@ -14,7 +14,6 @@
             var array = [];
             array.push(user,company);
             return httpService.httpPost('createCompanyByAdmin',array).then(function (response) {
-                console.log(response);
                 return response;
             })
         }
