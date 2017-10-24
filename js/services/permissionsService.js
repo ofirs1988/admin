@@ -16,7 +16,9 @@
         function setPermissions(permissions) {
             permissionList = [];
             angular.forEach(permissions, function (key,value) {
+                if(key){
                     permissionList.push(value);
+                }
             });
             return permissionList;
         }

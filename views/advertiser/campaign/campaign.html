@@ -1,0 +1,46 @@
+<div class="animated fadeIn" >
+    <div class="row">
+
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Video</strong>
+                    <small>Upload</small>
+                </div>
+
+                <div class="card-block">
+                    <form ng-app="fileUpload" name="form">
+                        <div class="row">
+
+                            <div class="form-group col-sm-8">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" ng-model="obj.name" id="name" placeholder="Enter name Of video">
+                            </div>
+
+                            <div class="form-group col-sm-4">
+                                <label for="clicks">Clicks</label>
+                                <input type="text" class="form-control" ng-model="obj.clicks" id="clicks" placeholder="Clicks Of user">
+                            </div>
+
+                            <div class="form-group col-sm-8">
+                                <button class="btn btn-danger" ngf-select ng-model="obj.video" name="file"><i class="fa fa-upload"></i>  Select Video</button>
+                                <div> Video preview: <video style="width: 100%;" controls ngf-src="obj.video"></video></div>
+                            </div>
+
+                            <div class="form-group col-sm-4">
+                                <button class="btn btn-danger" ngf-select ng-model="obj.poster" name="file"><i class="fa fa-upload"></i>  Select Poster</button>
+                                <div> Poster preview: <img style="width: 100%;" controls ngf-src="obj.poster"></img></div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="vm.upload()">submit</button>
+                    </form>
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+    <!--/.row-->
+</div>

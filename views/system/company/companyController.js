@@ -1,4 +1,4 @@
-app.controller('companyController', ['$scope','companyService', function ($scope,companyService) {
+app.controller('adminCompanyController', ['$scope','companyService', function ($scope,companyService) {
     console.log('company Controller');
     var vm = this;
     vm.createCompany = createCompany;

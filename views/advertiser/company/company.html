@@ -1,0 +1,52 @@
+<div class="col-sm-12" ng-init="vm.companyData()">
+    <form ng-submit="vm.updateCompany()">
+        <div class="card">
+            <div class="card-header">
+                <strong>Company</strong>
+                <small>Form</small>
+            </div>
+            <div class="card-block">
+                <div class="form-group">
+                    <label for="company">Company Name</label>
+                    <input type="text" class="form-control" ng-model="vm.company.name" ng-value="companyName"  id="company" placeholder="Enter your company name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" ng-value="companyEmail" ng-model="vm.company.email" placeholder="Email">
+                </div>
+
+                <div class="form-group">
+                    <label for="contact_name">Contact name</label>
+                    <input type="text" class="form-control" id="contact_name" ng-value="contact_name" ng-model="vm.company.contact_name" placeholder="Contact name">
+                </div>
+
+                <div class="row">
+
+                    <div class="form-group col-sm-8">
+                        <label for="phone">Phone</label>
+                        <input type="text" class="form-control" id="phone" ng-model="vm.company.phone" ng-value="companyPhone" placeholder="Enter your Phone">
+                    </div>
+
+                    <div class="form-group col-sm-4">
+                        <label for="op">op</label>
+                        <input type="text" class="form-control" id="op" ng-model="vm.company.op" ng-value="companyOp" placeholder="Enter your op">
+                    </div>
+                </div>
+                <!--/.row-->
+
+                <div class="form-group">
+                    <label for="site">Site</label>
+                    <input type="text" class="form-control" id="site" ng-model="vm.company.site" ng-value="companySite" placeholder="Enter your site">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Update Company</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" ui-sref="app.advertiser.createCampaign">Skip</button>
+                </div>
+
+            </div>
+
+        </div>
+    </form>
+</div>

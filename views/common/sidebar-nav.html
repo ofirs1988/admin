@@ -9,8 +9,6 @@
             <li class="nav-title">
                 Administrator
             </li>
-
-
             <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('app.system')}">
                 <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('app.system')}" href="#" permission permission-only="['Administrator','ADMIN']"><i class="icon-puzzle"></i> System</a>
                 <ul class="nav-dropdown-items">
@@ -19,16 +17,16 @@
                     <!--permission-only="['Administrator','ADMIN']"><i class="icon-puzzle"></i> Upload</a>-->
                     <!--</li>-->
                     <li class="nav-item">
-                        <a class="nav-link" ui-sref-active="active" ui-sref="app.system.videos"><i class="icon-puzzle"></i> Videos</a>
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.system.company"><i class="icon-puzzle"></i> Company</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.system.campaign"><i class="icon-puzzle"></i> Campaign</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" ui-sref-active="active" ui-sref="app.system.users"><i class="icon-puzzle"></i> Users</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" ui-sref-active="active" ui-sref="app.system.company"><i class="icon-puzzle"></i> Company</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" ui-sref-active="active" ui-sref="app.system.campaign"><i class="icon-puzzle"></i> Campaign</a>
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.system.videos"><i class="icon-puzzle"></i> Videos</a>
                     </li>
                 </ul>
             </li>
@@ -37,23 +35,23 @@
 
 
             <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('app.components')}">
-                <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('app.components')}" href="#" permission permission-only="['Administrator','ADMIN','Advertiser']" ><i class="icon-puzzle"></i> Advertiser</a>
+                <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('app.components')}" href="#" permission permission-only="['Administrator','ADMIN','advertiser']" ><i class="icon-puzzle"></i> Advertiser</a>
                 <ul class="nav-dropdown-items">
                     <!--<li class="nav-item">-->
                         <!--<a class="nav-link" ui-sref-active="active" ui-sref="app.components.upload" permission-->
                            <!--permission-only="['Administrator','ADMIN']"><i class="icon-puzzle"></i> Upload</a>-->
                     <!--</li>-->
-                    <li class="nav-item">
-                        <a class="nav-link" ui-sref-active="active" ui-sref="app.components.createCompany"><i class="icon-puzzle"></i> Create Company</a>
+                    <li class="nav-item" ng-if="!$root.isCompany">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.advertiser.createCompany"><i class="icon-puzzle"></i> Create Company</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" ui-sref-active="active" ui-sref="app.components.createUser"><i class="icon-puzzle"></i> Create User</a>
+                    <li class="nav-item" ng-if="$root.isCompany">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.advertiser.company"><i class="icon-puzzle"></i> Company</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" ui-sref-active="active" ui-sref="app.components.createUser"><i class="icon-puzzle"></i> Manage Company</a>
+                    <li class="nav-item" ng-if="!$root.isCampaign">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.advertiser.createCampaign"><i class="icon-puzzle"></i> Create Campaign</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" ui-sref-active="active" ui-sref="app.components.createUser"><i class="icon-puzzle"></i> Manage Users</a>
+                    <li class="nav-item" ng-if="$root.isCampaign">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.advertiser.campaign"><i class="icon-puzzle"></i> Campaign</a>
                     </li>
                 </ul>
             </li>

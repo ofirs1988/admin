@@ -62,8 +62,8 @@ app.config(['cfpLoadingBarProvider','envServiceProvider','$authProvider','$permi
 
 
 
-.run(['$rootScope','$state','$stateParams','$http','envService','$transitions','PermPermissionStore','$timeout','$q','AuthenticationService','$urlRouter',
-    function($rootScope, $state, $stateParams,$http,envService,$transitions,PermPermissionStore,$timeout,$q,AuthenticationService,$urlRouter) {
+.run(['$rootScope','$state','$stateParams','$http','envService','$transitions','PermPermissionStore','$timeout','$q','AuthenticationService','$urlRouter','permissionsService',
+    function($rootScope, $state, $stateParams,$http,envService,$transitions,PermPermissionStore,$timeout,$q,AuthenticationService,$urlRouter,permissionsService) {
         /* Before load app */
             var deferred = $q.defer();
             $timeout(function() {
@@ -74,12 +74,7 @@ app.config(['cfpLoadingBarProvider','envServiceProvider','$authProvider','$permi
                         deferred.reject();
                     }else {
                         if (0 < response.permissionList.length) {
-                            // do stuff
-                            PermPermissionStore.defineManyPermissions(response.permissionList, function (
-                                permissionName, transitionProperties) {
-                                console.log(permissionName);
-                                //transitionProperties
-                            });
+                            var permissions = PermPermissionStore.getStore();
                             $urlRouter.sync();
                             // Also enable router to listen to url changes
                             $urlRouter.listen();

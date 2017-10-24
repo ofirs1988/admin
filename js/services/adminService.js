@@ -1,18 +1,23 @@
 (function () {
     'use strict';
     app.factory('adminService', adminService);
-    adminService.$inject = ['$http','httpService'];
-    function adminService($http,httpService) {
+    adminService.$inject = ['$http','httpService','$rootScope'];
+    function adminService($http,httpService,$rootScope) {
         var service = {};
         service.getAdmin = getAdminData;
         return service;
 
-
         function getAdminData() {
+            var company = {};
             var admin = localStorage.getItem('dXNlcg==');
-            var company = localStorage.getItem('Y29tcGFueQ==');
+            var data = localStorage.getItem('ZGF0YQ==');
 
-            return [JSON.parse(admin),JSON.parse(company)];
+            data = JSON.parse(data);
+            console.log(data);
+
+            $rootScope.isCompany = data.company;
+            $rootScope.isCampaign = data.campaign;
+            return [JSON.parse(admin)];
         }
 
         function setCompany() {

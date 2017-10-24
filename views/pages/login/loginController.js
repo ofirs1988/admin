@@ -8,6 +8,7 @@
 
         function login() {
             AuthenticationService.AuthUser(vm.user).then(function (response) {
+                console.log(response);
                 if(!response.data.success){
                     $scope.$errors = response.error;
                 }else {

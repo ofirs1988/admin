@@ -2,33 +2,6 @@
     <form ng-submit="vm.createCompany()">
     <div class="card">
         <div class="card-header">
-            <strong>User</strong>
-            <small>Form</small>
-        </div>
-        <div class="card-block">
-            <div class="form-group">
-                <label for="user_email">Email</label>
-                <input type="email" class="form-control" ng-model="vm.user.email" id="user_email" placeholder="Enter email">
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" ng-model="vm.user.password" placeholder="Enter password">
-            </div>
-
-            <div class="form-group">
-                <label for="userName">Name</label>
-                <input type="text" class="form-control" id="userName" ng-model="vm.user.name" placeholder="Contact name">
-            </div>
-                <div class="form-group">
-                    <label for="user_phone">User Phone</label>
-                    <input type="text" class="form-control" ng-model="vm.user.phone" id="user_phone" placeholder="Enter your Phone">
-                </div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-header">
             <strong>Company</strong>
             <small>Form</small>
         </div>
@@ -69,7 +42,7 @@
 
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Create Company</button>
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Skip</button>
+                <button type="submit" class="btn btn-primary btn-lg btn-block" ui-sref="app.advertiser.createCampaign">Skip</button>
             </div>
 
         </div>

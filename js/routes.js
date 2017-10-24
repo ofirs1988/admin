@@ -52,7 +52,7 @@ angular
     },
       data: {
           permissions: {
-              only: ['ADMIN','Administrator']
+              only: ['ADMIN','Administrator','advertiser']
               //redirectTo: 'appSimple.login'
           }
       },

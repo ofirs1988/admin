@@ -23,7 +23,8 @@
         }
 
         function getCompany() {
-
+           var company = localStorage.getItem('Y29tcGFueQ==');
+           return JSON.parse(company);
         }
 
     }
